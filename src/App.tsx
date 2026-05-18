@@ -47,10 +47,19 @@ export default function App() {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://formsubmit.co/ajax/baez@hitster.page', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Contact from ${formData.name}`,
+          _template: "box"
+        }),
       });
 
       if (response.ok) {
@@ -78,8 +87,9 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      <main>
+        {/* Hero Section */}
+        <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
@@ -289,6 +299,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="flex flex-col md:flex-row justify-between items-center px-6 md:px-12 py-8 bg-black z-30 relative border-t border-white/10 gap-6">
