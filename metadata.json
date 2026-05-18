@@ -1,0 +1,8 @@
+{
+  "name": "Mr. Maiola",
+  "description": "Portfolio para Mr. Maiola, director de cine, basado en una estética cinematográfica para marcas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
