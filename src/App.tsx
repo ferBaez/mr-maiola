@@ -4,8 +4,9 @@
  */
 
 import { useState, useRef, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ChevronRight, ChevronLeft, Play, Instagram, Mail, ArrowRight } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Play } from 'lucide-react';
 
 const VIDEOS = [
   "544615537", // Hero background (also first in the list as requested)
@@ -40,7 +41,7 @@ export default function App() {
     }
   };
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
@@ -66,7 +67,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans overflow-hidden flex flex-col relative selection:bg-white/20">
+    <div className="min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden flex flex-col relative selection:bg-white/20">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-8 border-b border-white/10 mix-blend-normal backdrop-blur-md bg-black/40">
         <a href="#" className="text-xs tracking-[0.4em] uppercase font-semibold text-white/50 underline underline-offset-8 decoration-white/20 hover:text-white transition-colors">MR. MAIOLA</a>

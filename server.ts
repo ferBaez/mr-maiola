@@ -6,7 +6,13 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resend: Resend | null = null;
+function getResend() {
+  if (!resend && process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resend;
+}
 
 async function startServer() {
   const app = express();
@@ -23,12 +29,13 @@ async function startServer() {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
-      if (!process.env.RESEND_API_KEY) {
+      const resendClient = getResend();
+      if (!resendClient) {
          console.warn("RESEND_API_KEY not found, simulating email send.");
          return res.status(200).json({ success: true, message: "Email simulation successful." });
       }
 
-      const data = await resend.emails.send({
+      const data = await resendClient.emails.send({
         from: "Mr. Maiola Contact Form <onboarding@resend.dev>", // Or a verified domain you own in Resend
         to: ["baez@hitster.page"],
         subject: `New Contact from ${name}`,
